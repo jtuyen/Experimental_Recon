@@ -1,0 +1,11 @@
+---
+- block:
+  - name: 'assetnote: download wordlists'
+    shell: '/bin/bash -lc "aws s3 sync s3://assetnote-wordlists/data/ /root/resources/wordlists --no-sign-request"'
+    retries: 3
+    delay: 5
+    register: result
+    until: result.rc == 0
+  tags:
+    - web
+    - assetnote

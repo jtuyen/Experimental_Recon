@@ -1,0 +1,7 @@
+---
+- block:
+  - name: 'waybackurls: install'
+    shell: '/bin/bash -lc "go get github.com/tomnomnom/waybackurls"'
+  tags:
+    - web
+    - waybackurls

@@ -1,0 +1,27 @@
+---
+- block:
+  - name: 'paramspider: git clone'
+    git:
+      repo: https://github.com/devanshbatham/ParamSpider
+      dest: /root/paramspider
+      clone: yes
+    retries: 3
+    delay: 5
+  - name: 'paramspider: create .venv directory'
+    file:
+      path: /root/paramspider/.venv
+      state: directory
+  - name: 'paramspider: initialize virtualenv'
+    shell: 'bash -lc "virtualenv /root/paramspider/.venv"'
+  - name: 'paramspider: install python dependencies'
+    shell: 'bash -lc "source /root/paramspider/.venv/bin/activate && pip3 install -r requirements.txt"'
+    args:
+      chdir: /root/paramspider
+  - name: 'paramspider: transfer launcher script'
+    copy:
+      dest: /root/paramspider/launcher
+      mode: 0755
+      src: ../files/paramspider.sh
+  tags:
+    - web
+    - paramspider

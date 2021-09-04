@@ -1,0 +1,3 @@
+---
+- include: amass_recon.yml tags=recon,amass_recon
+- include: ffuf_recon.yml tags=recon,ffuf_recon

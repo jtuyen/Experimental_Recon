@@ -1,0 +1,11 @@
+---
+- name: 'Starting playbook: Instance Creation'
+  hosts: all
+  become: yes
+  become_user: root
+  remote_user: root
+
+  roles:
+   - common
+   - web
+   - resources

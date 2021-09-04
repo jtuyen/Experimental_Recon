@@ -1,0 +1,18 @@
+---
+- name: 'create output directory'
+  file:
+    path: /root/output/
+    state: directory
+    mode: '0755'
+- include: gobuster.yml tags=web,gobuster
+- include: assetfinder.yml tags=web,assetfinder
+- include: ffuf.yml tags=web,ffuf
+- include: httprobe.yml tags=web,httprobe
+- include: meg.yml tags=web,meg
+- include: qsreplace.yml tags=web,qsreplace
+- include: waybackurls.yml tags=web,waybackurls
+- include: subfinder.yml tags=web,subfinder
+- include: amass.yml tags=web,amass
+- include: massdns.yml tags=web,massdns
+- include: paramspider.yml tags=web,paramspider
+- include: interlace.yml tags=web,interlace

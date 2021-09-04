@@ -1,0 +1,11 @@
+---
+- block:
+  - name: 'gobuster: install'
+    shell: '/bin/bash -lc "go get github.com/OJ/gobuster"'
+    retries: 3
+    delay: 5
+    register: result
+    until: result.rc == 0
+  tags:
+    - web
+    - gobuster

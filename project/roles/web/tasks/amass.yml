@@ -1,0 +1,11 @@
+---
+- block:
+  - name: 'amass: install'
+    snap:
+      name: amass
+      state: present
+    retries: 3
+    delay: 5
+  tags:
+    - web
+    - amass

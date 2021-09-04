@@ -1,0 +1,11 @@
+---
+- block:
+  - name: 'ffuf: install'
+    shell: '/bin/bash -lc "go get github.com/ffuf/ffuf"'
+    retries: 3
+    delay: 5
+    register: result
+    until: result.rc == 0
+  tags:
+    - web
+    - ffuf

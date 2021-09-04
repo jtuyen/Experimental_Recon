@@ -1,0 +1,27 @@
+---
+- block:
+  - name: 'interlace: git clone'
+    git:
+      repo: https://github.com/codingo/Interlace
+      dest: /root/interlace
+      clone: yes
+    retries: 3
+    delay: 5
+  - name: 'interlace: create .venv directory'
+    file:
+      path: /root/interlace/.venv
+      state: directory
+  - name: 'interlace: initialize virtualenv'
+    shell: 'bash -lc "virtualenv /root/interlace/.venv"'
+  - name: 'interlace: install python dependencies'
+    shell: 'bash -lc "source /root/interlace/.venv/bin/activate && python3 setup.py install"'
+    args:
+      chdir: /root/interlace
+  - name: 'interlace: transfer launcher script'
+    copy:
+      dest: /root/interlace/launcher
+      mode: 0755
+      src: ../files/interlace.sh
+  tags:
+    - web
+    - interlace

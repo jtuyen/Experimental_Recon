@@ -1,0 +1,11 @@
+---
+- block:
+  - name: 'assetfinder: install'
+    shell: '/bin/bash -lc "go get github.com/tomnomnom/assetfinder"'
+    retries: 3
+    delay: 5
+    register: result
+    until: result.rc == 0
+  tags:
+    - web
+    - assetfinder

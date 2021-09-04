@@ -1,0 +1,22 @@
+---
+- block:
+  - name: 'subfinder: install'
+    shell: '/bin/bash -lc "GO111MODULE=on go get -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder"'
+    retries: 3
+    delay: 5
+    register: result
+    until: result.rc == 0
+  - name: 'subfinder: create config directory'
+    file:
+      path: /root/.config/subfinder/
+      state: directory
+      mode: '0755'
+  - name: 'subfinder: copy local file to remote'
+    copy:
+      src: roles/web/files/subfinder.yml
+      dest: /root/.config/subfinder/config.yaml
+      mode: '0655'
+      follow: yes
+  tags:
+    - web
+    - subfinder

@@ -1,0 +1,18 @@
+---
+- block:
+  - name: 'massdns: git clone'
+    git:
+      repo: https://github.com/blechschmidt/massdns
+      dest: /root/massdns
+      clone: yes
+    retries: 3
+    delay: 5
+    register: massdns_installed
+  - name: 'massdns: compile'
+    shell: make
+    args:
+      chdir: /root/massdns/
+    when: massdns_installed.changed
+  tags:
+    - web
+    - massdns

@@ -1,0 +1,9 @@
+---
+- name: 'Starting Recon: FFuF'
+  hosts: all
+  become: yes
+  become_user: root
+  remote_user: root
+
+  roles:
+  - role: './recon/ffuf_recon.yml'

@@ -1,0 +1,7 @@
+{
+    "ffuf":
+    {
+        "wordlist_file": "/root/resources/wordlists/Discovery/Web-Content/directory-list-2.3-medium.txt",
+        "save_to_local_dir": "/Users/jtuyen/Documents/BugBounty/ffuf"
+    }
+}

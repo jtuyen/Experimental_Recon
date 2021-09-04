@@ -1,0 +1,26 @@
+---
+- block:
+  - name: 'ffuf: create chunking directory'
+    file:
+      path: /root/resources/wordlists/chunking
+      state: directory
+      mode: 0655
+  - name: 'ffuf: split wordlist into chunks'
+    shell: '/bin/bash -lc "split -n{{instance_num}} --additional-suffix=.txt /root/resources/wordlists/Discovery/Web-Content/directory-list-2.3-medium.txt /root/resources/wordlists/chunking/chunk-"'
+  - name: 'ffuf: capture chunk filename according to instance number'
+    shell: '/bin/bash -lc "ls -1 /root/resources/wordlists/chunking | sed -n {{instance_num}}p"'
+    register: chunk_filename
+  - name: 'ffuf: subdomain enumeration'
+    shell: '/bin/bash -lc "ffuf -w /root/resources/wordlists/chunking/{{chunk_filename.stdout}} -u {{item}}/FUZZ -od /root/output/ffuf"'
+    with_lines: 'cat ../../../../discovery/domains.txt'
+  - name: 'ffuf: copy files to local'
+    fetch:
+      src: /root/output/ffuf
+      dest: /Users/jtuyen/Documents/BugBounty/{{domain}}/ffuf
+  - name: 'ffuf: delete wordlist directory - chunking'
+    file:
+      path: /root/resources/wordlists/chunking
+      state: absent
+  tags:
+    - recon
+    - ffuf_recon

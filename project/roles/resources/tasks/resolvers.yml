@@ -1,0 +1,10 @@
+---
+- block:
+  - name: 'resolvers: download resolvers list'
+    get_url:
+      url: https://raw.githubusercontent.com/janmasarik/resolvers/master/resolvers.txt
+      dest: /root/resources
+      mode: '0655'
+  tags:
+    - resources
+    - resolvers

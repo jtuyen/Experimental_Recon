@@ -1,0 +1,33 @@
+---
+- block:
+  - name: 'packages: update apt cache'
+    apt:
+      upgrade: 'yes'
+      update_cache: 'yes'
+      update_cache_retries: 8
+  - name: 'packages: install common packages'
+    apt:
+      name:
+        - nmap
+        - python3
+        - python3-pip
+        - python-setuptools
+        - golang
+        - git
+        - awscli
+      state: present
+  - name: 'packages: install virtualenv'
+    pip:
+      executable: pip3
+      name: virtualenv
+      state: present
+  - name: 'packages: echo current PATH environment'
+    shell: '/bin/bash -lc "echo $PATH"'
+    register: path_result
+  - name: 'packages: add GO path to PATH environment'
+    lineinfile:
+      dest: /etc/environment
+      line: 'PATH="{{path_result.stdout}}:/root/go/bin"'
+  tags:
+    - common
+    - packages

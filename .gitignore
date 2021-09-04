@@ -1,0 +1,5 @@
+/artifacts
+/env/ssh_key
+/json/digitalocean.json
+/project/roles/web/files/subfinder.yml
+.DS_Store

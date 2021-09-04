@@ -1,0 +1,7 @@
+---
+- block:
+  - name: 'qsreplace: install'
+    shell: '/bin/bash -lc "go get github.com/tomnomnom/qsreplace"'
+  tags:
+    - web
+    - qsreplace

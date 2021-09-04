@@ -1,0 +1,15 @@
+---
+- block:
+  - name: 'amass: subdomain enumeration'
+    shell: '/bin/bash -lc "amass enum --passive -d {{domain}} -timeout 15 -o /root/output/{{domain}}-passive.txt"'
+    retries: 3
+    delay: 5
+    register: result
+    until: result.rc == 0
+  - name: 'amass: copy files to local'
+    fetch:
+      src: /root/output/{{domain}}-passive.txt
+      dest: /Users/jtuyen/Documents/BugBounty/{{domain}}/amass/{{domain}}-passive.txt
+  tags:
+    - recon
+    - amass_recon

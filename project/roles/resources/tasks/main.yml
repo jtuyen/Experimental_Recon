@@ -1,0 +1,14 @@
+---
+- name: 'create resources directory'
+  file:
+    path: /root/resources/
+    state: directory
+    mode: '0755'
+- name: 'create wordlists directory'
+  file:
+    path: /root/resources/wordlists/
+    state: directory
+    mode: '0755'
+- include: seclists.yml tags=resources,seclists
+- include: resolvers.yml tags=resources,resolvers
+- include: assetnote.yml tags=resources,assetnote

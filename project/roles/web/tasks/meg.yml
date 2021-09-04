@@ -1,0 +1,7 @@
+---
+- block:
+  - name: 'meg: install'
+    shell: '/bin/bash -lc "go get github.com/tomnomnom/meg"'
+  tags:
+    - web
+    - meg

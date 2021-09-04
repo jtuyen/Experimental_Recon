@@ -1,0 +1,10 @@
+---
+- block:
+  - name: 'seclists: git clone'
+    git:
+      repo: 'https://github.com/danielmiessler/SecLists.git'
+      dest: /root/resources/wordlists
+      update: yes
+  tags:
+    - resources
+    - seclists
